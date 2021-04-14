@@ -39,34 +39,36 @@
    
    */
 
-
-function myFunction(salary, taxCode, incomeTax1, incomeTax2, ownsCar) {
-  var totalIncomeTax = incomeTax1 + incomeTax2;
-  var studentLoan = (salary - 17775) * 0.09;
-  var originalSalary = salary;
-  var nationalInsurance = null;
-
-  if (taxCode === "1150L") {
-    nationalInsurance = salary * 0.1;
-  } else if (taxCode === "ST") {
-    nationalInsurance = salary * 0.05;
-  } else {
-    nationalInsurance = salary * 0.08;
-  }
-
-  var deductions = [nationalInsurance, totalIncomeTax, studentLoan];
-
-  salary = salary - deductions[0];
-  salary = salary - deductions[1];
-  salary = salary - deductions[2];
-
-  return (
-    "Your gross income is £" +
-    originalSalary.toString() +
-    " and your net income is £" +
-    salary.toString() +
-    "."
-  );
+function nationalInsurance(salary,taxCode,resultSalary){
+// declared variables
+   let multipleTo1150L = 0.1;
+   let multipleToST = 0.05;
+   let multipleToNothingElse = 0.08;
+   let nationalInsurance = null;
+// operator to ranges of insurance multiple    
+   if (taxCode === "1150L") {
+      nationalInsurance = resultSalary * multipleTo1150L;
+   } else if (taxCode === "ST") {
+      nationalInsurance = resultSalary * multipleToST;
+   } else {
+      nationalInsurance = resultSalary * multipleToNothingElse;
+   }
+   return (`Your gross income is $${salary.toString()} and your net income is $${resultSalary.toString()}`);
 }
 
-console.log(myFunction(28000, "1150L", 1000, 580, false));
+
+
+function salaryDeductions(salary, taxCode, taxIVA, taxIRPF) {
+// variable declarations
+   let studentRestCoeficient = 17775;
+   let steudentMultiplyCoeficient = 0.09;
+   let studentLoan = (salary - studentRestCoeficient) * steudentMultiplyCoeficient;
+   let totalIncomeTax = taxIVA + taxIRPF;
+   const deductions = [totalIncomeTax, studentLoan]; 
+// operation to final salary    
+   resultSalary = salary-deductions[0]-deductions[1];
+// nationalInsurance function callback
+   return nationalInsurance(salary,taxCode,resultSalary);
+};
+
+console.log(salaryDeductions(28000, "1150L", 1000, 580)); // print example with values 

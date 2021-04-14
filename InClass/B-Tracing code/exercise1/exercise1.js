@@ -16,3 +16,5 @@ function greetPeople(people) {
   */
   var mentors = ['Irina', 'Ashleigh', 'Etza'];
   var result = greetPeople(mentors)
+
+  
